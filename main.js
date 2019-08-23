@@ -4,7 +4,6 @@ const greyCloud = document.querySelector("#greyCloud");
 const timeline = anime.timeline({
     duration: 1750
 });
-
 $('.text').mouseover(()=>{
     $('.text').css("color","#fff")
 })
@@ -198,5 +197,11 @@ timeline.finished.then(()=>{
                 )})
                 }
             });
-    })
+    });
+    $('#hideAll').css({
+        opacity:1,
+        overflow:'visible'
+    }).children("span").css({
+        left:0
+    });
 })

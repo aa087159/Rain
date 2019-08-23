@@ -18,10 +18,16 @@ body{
     grid-row: 3/4;
     justify-self: center;
     align-self: end;
-    height: 70px;
-    width: 70px;
+    height: 71px;
+    width: 71px;
     border-radius: 50%;
     opacity: 0;
+    position: relative;
+    left: 15px;
+    top: -4px;
+    border: 0;
+    background-color: #19f6e8;
+    overflow: hidden;
 }
 
 .polymorph{
@@ -190,7 +196,10 @@ nav{
 }
 
 #hideAll span {
-    color: red
+    color: red;
+    transition:all 0.7s;
+    position: relative;
+    left: 50%;
   }
   
   #hideAll span:before {
