@@ -199,8 +199,7 @@ timeline.finished.then(()=>{
             });
     });
     $('#hideAll').css({
-        opacity:1,
-        overflow:'visible'
+        opacity:1
     }).children("span").css({
         left:0
     });
