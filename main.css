@@ -18,15 +18,15 @@ body{
     grid-row: 3/4;
     justify-self: center;
     align-self: end;
-    height: 71px;
-    width: 71px;
+    height: 70px;
+    width: 70px;
     border-radius: 50%;
     opacity: 0;
     position: relative;
     left: 15px;
-    top: -4px;
+    top: -3px;
     border: 0;
-    background-color: #19f6e8;
+    background-color: transparent;
     overflow: hidden;
 }
 
