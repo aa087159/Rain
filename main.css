@@ -13,23 +13,6 @@ body{
     font-family: 'Noto Sans JP', sans-serif;
 }
 
-#hideAll{
-    grid-column: 2/3;
-    grid-row: 3/4;
-    justify-self: center;
-    align-self: end;
-    height: 70px;
-    width: 70px;
-    border-radius: 50%;
-    opacity: 0;
-    position: relative;
-    left: 15px;
-    top: -3px;
-    border: 0;
-    background-color: transparent;
-    overflow: hidden;
-}
-
 .polymorph{
     fill: rgb(22, 22, 22);
     grid-column: 1/4;
@@ -185,6 +168,8 @@ nav{
     grid-row: 2/3;
     align-self: center;
     justify-self: center;
+    position: relative;
+    top: -50px;
     width: 30%;
     background: transparent;
     border: 1px solid #fff;
@@ -195,14 +180,45 @@ nav{
     cursor: pointer;
 }
 
-#hideAll span {
-    color: red;
-    transition:all 0.7s;
+#hideAll{
+    grid-column: 2/3;
+    grid-row: 3/4;
+    justify-self: center;
+    align-self: end;
+    height: 70px;
+    width: 70px;
+    opacity: 0;
     position: relative;
-    left: 50%;
+    left: 15px;
+    top: -7px;
+    border: 0;
+    background-color: transparent;
+}
+
+#hideAll span{
+    color: #fff;
+    transition:all 0.7s;
+    font-weight: 800;
+    font-size: 40px;
+    letter-spacing: -5px;
   }
-  
-  #hideAll span:before {
-    content: '\00bb';
-    opacity: 1;
-  }
+
+#hideAll span:hover{
+    animation-name: bounceright;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes bounceright {
+      to{ color: #19F6E8 }
+}
+
+.overlay{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: rgb(25,25,25,0.5)
+}

@@ -73,6 +73,10 @@ timeline.add({
     targets: '#firstClick',
     d:[{ value: buttonPath }]
 })
+.add({
+    targets: '#hideAll',
+    opacity:1
+},"-= 3500")
 
 $('#logo').on('mouseover', ()=>{
     anime({
@@ -134,15 +138,17 @@ timeline.finished.then(()=>{
                     })
 
                     $('.navInput').on('keyup', (e)=>{
-                        var e = window.event||e;
-                        var keyID = e.keyCode;
-                        if (keyID == 13) {
-                            e.preventDefault();
-                        }
+                        $(window).keydown(function(event){
+                            if(event.keyCode == 13) {
+                              event.preventDefault()
+                              return false
+                            }
+                          });
                         let city = e.target.value;
                 
                         $.ajax({
                             url: 'https://community-open-weather-map.p.rapidapi.com/weather',
+                            type: 'get',
                             data: {
                                 'q': city
                             },
@@ -153,12 +159,17 @@ timeline.finished.then(()=>{
                         }).done(function(res){
                             console.log(res)
                             $.ajax({
-                                url: '../timezone.json',
-                                dataType: 'json',
-                                type: 'get',
-                                cache: false,
-                            }).done(function(jsonData){
-                
+                                url: 'https://api.unsplash.com/photos/random',
+                                data: {
+                                    client_id: "3aab5b05ce9593fcc79c02d5225215ace5d00375a155a974b7691ba982bfd07f",
+                                    secret: "9f7aef52065b577d27648666cff2631ad06db10bd8116576cde4c12173e25f3e"
+                                },
+                                headers: {
+                                    'Accept-Version': 'v1'
+                                }
+                            }).done(function(unsplash){
+                                console.log(unsplash);
+                                var photo = unsplash.links.download
                                 
                                 let { coord, weather, main, name, timezone } = res
                                 let lon = `Longitude: ${coord[Object.keys(coord)[0]]}`
@@ -171,13 +182,10 @@ timeline.finished.then(()=>{
                                     return nd.toLocaleString();
                                 }
                 
-                                $(jsonData.times).each((index, value)=>{
-                                    console.log(value)
-                                })
                                 let output = 
                                 `
-                                <div class="jumbotron text-dark mt-5 mr-5">
-                                    <div class="container">
+                                <div class="jumbotron text-light mt-5 mr-5" style="background: url(${photo}); background-size: cover; z-index: 2;position: relative">
+                                        <div class="overlay"></div>
                                         <div><span class='display-3'>${name}</span>&nbsp;<span class='lead'>${difftimezone(timezone/3600).toString()}</span></div>
                                         <hr>
                                         <p>${' '}${' '}${lon}${', '}${lat}</p>
@@ -188,7 +196,6 @@ timeline.finished.then(()=>{
                                             <div>Lowest Temperature: ${Math.round(middleData[3]-273.15)}</div>
                                             <div>Highest Temperature: ${Math.round(middleData[4]-273.15)}</div>
                                         </div>
-                                    </div>
                                 </div>
                                 `
                             $('.info').html(output)
@@ -198,9 +205,5 @@ timeline.finished.then(()=>{
                 }
             });
     });
-    $('#hideAll').css({
-        opacity:1
-    }).children("span").css({
-        left:0
-    });
+    
 })
